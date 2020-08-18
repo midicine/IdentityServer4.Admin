@@ -6,13 +6,15 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces
 {
     public interface IAdminConfigurationDbContext : IConfigurationDbContext
     {
-        DbSet<ApiSecret> ApiSecrets { get; set; }
+        DbSet<ApiResourceSecret> ApiResourceSecret { get; set; }
 
         DbSet<ApiScope> ApiScopes { get; set; }
 
+        DbSet<ApiResourceScope> ApiResourceScopes { get; set; }
+
         DbSet<ApiScopeClaim> ApiScopeClaims { get; set; }
 
-        DbSet<IdentityClaim> IdentityClaims { get; set; }
+        DbSet<IdentityResourceClaim> IdentityResourceClaims { get; set; }
 
         DbSet<ApiResourceClaim> ApiResourceClaims { get; set; }
 

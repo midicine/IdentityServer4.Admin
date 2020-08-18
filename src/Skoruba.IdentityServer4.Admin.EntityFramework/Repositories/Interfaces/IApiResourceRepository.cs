@@ -1,6 +1,6 @@
-﻿using System.Threading.Tasks;
-using IdentityServer4.EntityFramework.Entities;
+﻿using IdentityServer4.EntityFramework.Entities;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Extensions.Common;
+using System.Threading.Tasks;
 using ApiResource = IdentityServer4.EntityFramework.Entities.ApiResource;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.Repositories.Interfaces
@@ -39,13 +39,13 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.Repositories.Interfaces
 
         Task<int> DeleteApiScopeAsync(ApiScope apiScope);
 
-        Task<PagedList<ApiSecret>> GetApiSecretsAsync(int apiResourceId, int page = 1, int pageSize = 10);
+        Task<PagedList<ApiResourceSecret>> GetApiSecretsAsync(int apiResourceId, int page = 1, int pageSize = 10);
 
-        Task<int> AddApiSecretAsync(int apiResourceId, ApiSecret apiSecret);
+        Task<int> AddApiSecretAsync(int apiResourceId, ApiResourceSecret apiSecret);
 
-        Task<ApiSecret> GetApiSecretAsync(int apiSecretId);
+        Task<ApiResourceSecret> GetApiSecretAsync(int apiSecretId);
 
-        Task<int> DeleteApiSecretAsync(ApiSecret apiSecret);
+        Task<int> DeleteApiSecretAsync(ApiResourceSecret apiSecret);
 
         Task<bool> CanInsertApiScopeAsync(ApiScope apiScope);
 

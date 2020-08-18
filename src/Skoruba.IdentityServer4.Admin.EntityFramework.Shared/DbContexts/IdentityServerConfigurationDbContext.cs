@@ -25,7 +25,7 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts
 
         public DbSet<ApiScopeClaim> ApiScopeClaims { get; set; }
 
-        public DbSet<IdentityClaim> IdentityClaims { get; set; }
+        public DbSet<IdentityClaim> IdentityResourceClaims { get; set; }
 
         public DbSet<ApiResourceClaim> ApiResourceClaims { get; set; }
 
