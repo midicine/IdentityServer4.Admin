@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Skoruba.IdentityServer4.Admin.EntityFramework.Shared.Constants;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.AuditLogging
@@ -58,7 +59,7 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Aud
 
                     b.HasKey("Id");
 
-                    b.ToTable("AuditLog");
+                    b.ToTable("AuditLog", SchemaConsts.Admin);
                 });
 #pragma warning restore 612, 618
         }

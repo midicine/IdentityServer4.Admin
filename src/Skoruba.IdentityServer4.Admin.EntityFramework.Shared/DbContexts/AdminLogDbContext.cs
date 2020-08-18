@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Skoruba.IdentityServer4.Admin.EntityFramework.Constants;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Entities;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
+using Skoruba.IdentityServer4.Admin.EntityFramework.Shared.Constants;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts
 {
@@ -25,7 +25,7 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts
         {
             builder.Entity<Log>(log =>
             {
-                log.ToTable(TableConsts.Logging);
+                log.ToTable(EntityFramework.Constants.TableConsts.Logging, SchemaConsts.Admin);
                 log.HasKey(x => x.Id);
                 log.Property(x => x.Level).HasMaxLength(128);
             });

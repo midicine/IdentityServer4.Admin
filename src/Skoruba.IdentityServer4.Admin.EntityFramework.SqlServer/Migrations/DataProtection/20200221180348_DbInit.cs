@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Skoruba.IdentityServer4.Admin.EntityFramework.Shared.Constants;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.DataProtection
 {
@@ -7,6 +8,7 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Dat
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                schema: SchemaConsts.Admin,
                 name: "DataProtectionKeys",
                 columns: table => new
                 {
@@ -24,7 +26,8 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Dat
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "DataProtectionKeys");
+                name: "DataProtectionKeys",
+                schema: SchemaConsts.Admin);
         }
     }
 }

@@ -1,5 +1,6 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Skoruba.IdentityServer4.Admin.EntityFramework.Shared.Constants;
+using System;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.AuditLogging
 {
@@ -8,6 +9,7 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Aud
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                schema: SchemaConsts.Admin,
                 name: "AuditLog",
                 columns: table => new
                 {
@@ -33,7 +35,8 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Aud
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AuditLog");
+                name: "AuditLog",
+                schema: SchemaConsts.Admin);
         }
     }
 }

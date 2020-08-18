@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Skoruba.IdentityServer4.Admin.EntityFramework.Shared.Constants;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts
 {
@@ -12,5 +10,11 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts
 
         public IdentityServerDataProtectionDbContext(DbContextOptions<IdentityServerDataProtectionDbContext> options)
             : base(options) { }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.HasDefaultSchema(SchemaConsts.Admin);
+        }
     }
 }

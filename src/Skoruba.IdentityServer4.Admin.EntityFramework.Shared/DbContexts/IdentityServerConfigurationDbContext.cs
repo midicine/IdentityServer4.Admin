@@ -3,15 +3,17 @@ using IdentityServer4.EntityFramework.Entities;
 using IdentityServer4.EntityFramework.Options;
 using Microsoft.EntityFrameworkCore;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
+using Skoruba.IdentityServer4.Admin.EntityFramework.Shared.Constants;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts
 {
     public class IdentityServerConfigurationDbContext : ConfigurationDbContext<IdentityServerConfigurationDbContext>, IAdminConfigurationDbContext
     {
-        public IdentityServerConfigurationDbContext(DbContextOptions<IdentityServerConfigurationDbContext> options, ConfigurationStoreOptions storeOptions)
-            : base(options, storeOptions)
-        {
-        }
+        public IdentityServerConfigurationDbContext(
+            DbContextOptions<IdentityServerConfigurationDbContext> options,
+            ConfigurationStoreOptions storeOptions)
+            : base(options, storeOptions) =>
+            storeOptions.DefaultSchema = SchemaConsts.Configuration;
 
         public DbSet<ApiResourceProperty> ApiResourceProperties { get; set; }
 
