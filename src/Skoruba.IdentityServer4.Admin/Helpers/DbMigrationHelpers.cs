@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using IdentityModel;
+﻿using IdentityModel;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +10,9 @@ using Skoruba.AuditLogging.EntityFramework.Entities;
 using Skoruba.IdentityServer4.Admin.Configuration;
 using Skoruba.IdentityServer4.Admin.Configuration.Interfaces;
 using Skoruba.IdentityServer4.Admin.EntityFramework.Interfaces;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Skoruba.IdentityServer4.Admin.Helpers
 {
@@ -36,20 +36,20 @@ namespace Skoruba.IdentityServer4.Admin.Helpers
             where TLogDbContext : DbContext, IAdminLogDbContext
             where TAuditLogDbContext : DbContext, IAuditLoggingDbContext<AuditLog>
             where TDataProtectionDbContext : DbContext, IDataProtectionKeyContext
-            where TUser : IdentityUser, new()
-            where TRole : IdentityRole, new()
+            where TUser : IdentityUser<Guid>, new()
+            where TRole : IdentityRole<Guid>, new()
         {
             using (var serviceScope = host.Services.CreateScope())
             {
                 var services = serviceScope.ServiceProvider;
-                
-                if ((databaseMigrationsConfiguration != null && databaseMigrationsConfiguration.ApplyDatabaseMigrations) 
+
+                if ((databaseMigrationsConfiguration != null && databaseMigrationsConfiguration.ApplyDatabaseMigrations)
                     || (applyDbMigrationWithDataSeedFromProgramArguments))
                 {
                     await EnsureDatabasesMigratedAsync<TIdentityDbContext, TIdentityServerDbContext, TPersistedGrantDbContext, TLogDbContext, TAuditLogDbContext, TDataProtectionDbContext>(services);
                 }
 
-                if ((seedConfiguration != null && seedConfiguration.ApplySeed) 
+                if ((seedConfiguration != null && seedConfiguration.ApplySeed)
                     || (applyDbMigrationWithDataSeedFromProgramArguments))
                 {
                     await EnsureSeedDataAsync<TIdentityServerDbContext, TUser, TRole>(services);
@@ -101,8 +101,8 @@ namespace Skoruba.IdentityServer4.Admin.Helpers
 
         public static async Task EnsureSeedDataAsync<TIdentityServerDbContext, TUser, TRole>(IServiceProvider serviceProvider)
         where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
-        where TUser : IdentityUser, new()
-        where TRole : IdentityRole, new()
+        where TUser : IdentityUser<Guid>, new()
+        where TRole : IdentityRole<Guid>, new()
         {
             using (var scope = serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
@@ -121,10 +121,10 @@ namespace Skoruba.IdentityServer4.Admin.Helpers
         /// </summary>
         private static async Task EnsureSeedIdentityData<TUser, TRole>(UserManager<TUser> userManager,
             RoleManager<TRole> roleManager, IdentityDataConfiguration identityDataConfiguration)
-            where TUser : IdentityUser, new()
-            where TRole : IdentityRole, new()
+            where TUser : IdentityUser<Guid>, new()
+            where TRole : IdentityRole<Guid>, new()
         {
-            if (!await roleManager.Roles.AnyAsync())
+            if (true || !await roleManager.Roles.AnyAsync())
             {
                 // adding roles from seed
                 foreach (var r in identityDataConfiguration.Roles)
@@ -189,17 +189,18 @@ namespace Skoruba.IdentityServer4.Admin.Helpers
         private static async Task EnsureSeedIdentityServerData<TIdentityServerDbContext>(TIdentityServerDbContext context, IdentityServerDataConfiguration identityServerDataConfiguration)
             where TIdentityServerDbContext : DbContext, IAdminConfigurationDbContext
         {
-            if (!context.IdentityResources.Any())
+            if (true || !context.IdentityResources.Any())
             {
                 foreach (var resource in identityServerDataConfiguration.IdentityResources)
                 {
-                    await context.IdentityResources.AddAsync(resource.ToEntity());
+                    if (context.IdentityResources.All(x => x.Name != resource.Name))
+                        await context.IdentityResources.AddAsync(resource.ToEntity());
                 }
 
                 await context.SaveChangesAsync();
             }
 
-            if (!context.ApiResources.Any())
+            if (true || !context.ApiResources.Any())
             {
                 foreach (var resource in identityServerDataConfiguration.ApiResources)
                 {
@@ -214,7 +215,7 @@ namespace Skoruba.IdentityServer4.Admin.Helpers
                 await context.SaveChangesAsync();
             }
 
-            if (!context.Clients.Any())
+            if (true || !context.Clients.Any())
             {
                 foreach (var client in identityServerDataConfiguration.Clients)
                 {

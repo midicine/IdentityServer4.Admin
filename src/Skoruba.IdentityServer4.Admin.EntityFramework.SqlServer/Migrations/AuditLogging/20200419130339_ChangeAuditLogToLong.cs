@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Skoruba.IdentityServer4.Admin.EntityFramework.Shared.Constants;
 
 namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.AuditLogging
 {
@@ -6,9 +7,10 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Aud
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey("PK_AuditLog", "AuditLog");
+            migrationBuilder.DropPrimaryKey("PK_AuditLog", "AuditLog", SchemaConsts.Admin);
 
             migrationBuilder.AlterColumn<long>(
+                schema: SchemaConsts.Admin,
                 name: "Id",
                 table: "AuditLog",
                 nullable: false,
@@ -17,12 +19,12 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Aud
                 .Annotation("SqlServer:Identity", "1, 1")
                 .OldAnnotation("SqlServer:Identity", "1, 1");
 
-            migrationBuilder.AddPrimaryKey("PK_AuditLog", "AuditLog", "Id");
+            migrationBuilder.AddPrimaryKey("PK_AuditLog", "AuditLog", "Id", SchemaConsts.Admin);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropPrimaryKey("PK_AuditLog", "AuditLog");
+            migrationBuilder.DropPrimaryKey("PK_AuditLog", "AuditLog", SchemaConsts.Admin);
 
             migrationBuilder.AlterColumn<int>(
                 name: "Id",
@@ -33,7 +35,7 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Aud
                 .Annotation("SqlServer:Identity", "1, 1")
                 .OldAnnotation("SqlServer:Identity", "1, 1");
 
-            migrationBuilder.AddPrimaryKey("PK_AuditLog", "AuditLog", "Id");
+            migrationBuilder.AddPrimaryKey("PK_AuditLog", "AuditLog", "Id", SchemaConsts.Admin);
         }
     }
 }

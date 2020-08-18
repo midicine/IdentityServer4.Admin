@@ -8,6 +8,7 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.SqlServer.Migrations.Aud
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.EnsureSchema(SchemaConsts.Admin);
             migrationBuilder.CreateTable(
                 schema: SchemaConsts.Admin,
                 name: "AuditLog",

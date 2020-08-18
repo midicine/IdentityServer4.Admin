@@ -9,7 +9,7 @@
       {
         "Username": "admin",
         "Password": "Password1",
-        "Email": "test@executivecentre.com",
+        "Email": "admin@executivecentre.com",
         "Roles": [
           "IdentityAdminAdministrator"
         ],

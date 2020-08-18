@@ -2,8 +2,8 @@
 
 namespace Skoruba.IdentityServer4.Shared.Dtos.Identity
 {
-    public class IdentityRolesDto : RolesDto<IdentityRoleDto, string>
+    public class IdentityRolesDto : RolesDto<IdentityRoleDto, System.Guid>
     {
-        
+
     }
 }

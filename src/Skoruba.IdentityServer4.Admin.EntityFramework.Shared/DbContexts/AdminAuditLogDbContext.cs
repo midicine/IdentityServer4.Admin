@@ -18,8 +18,12 @@ namespace Skoruba.IdentityServer4.Admin.EntityFramework.Shared.DbContexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema(SchemaConsts.Admin);
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<AuditLog>(m =>
+            {
+                m.HasKey(x => x.Id);
+                m.ToTable($"{nameof(AuditLog)}", SchemaConsts.Admin);
+            });
         }
     }
 }
